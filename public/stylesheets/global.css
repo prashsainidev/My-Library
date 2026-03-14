@@ -25,13 +25,18 @@ body {
 }
 
 .container {
-    max-width: 1200px;
-    margin: auto;
-    margin-bottom: 50px;
+    display: flex;
+    min-height: 100vh;
+    max-width: 100%;
+    margin: 0;
 }
 
 .inner-container {
-    margin: 0 32px; 
+    flex: 1;
+    padding: 3rem 4rem;
+    margin: 0;
+    margin-left: 280px; 
+    transition: margin 0.3s ease;
 }
 
 .page-header {
@@ -42,4 +47,16 @@ body {
 
 .error-message { 
     color: hsl(var(--color-danger-hue), 100%, 50%);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+    .inner-container {
+        margin-left: 0;
+        margin-top: 80px; /* Space for mobile header */
+        padding: 2rem 1.5rem;
+    }
 }

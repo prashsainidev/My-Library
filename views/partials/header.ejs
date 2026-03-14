@@ -1,7 +1,14 @@
 <header>
     <nav class="header-nav">
-        <a class="header-title" href="/">MyLibrary</a>
-        <ul>
+        <div class="header-top">
+            <a class="header-title" href="/">MyLibrary</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <ul id="nav-menu">
             <li><a href="/books">Books</a></li>
             <li><a href="/books/new">Add Book</a></li>
             <li><a href="/authors">Authors</a></li>
@@ -9,3 +16,10 @@
         </ul>
     </nav>
 </header>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+        document.getElementById('nav-menu').classList.toggle('active');
+        this.classList.toggle('active');
+    });
+</script>

@@ -24,6 +24,7 @@
 
 .form-item-no-grow {
     flex-grow: 0;
+    min-width: 200px; /* Ensure FilePond has enough space */
 }
 
 .form-row-end {
@@ -66,7 +67,7 @@
 
 .form-item input:focus, .form-item select:focus, .form-item textarea:focus {
     border-color: var(--form-input-border-color-light);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
     background-color: rgba(255, 255, 255, 0.05);
 }
 
@@ -75,6 +76,7 @@
     font-family: var(--font-subheading);
     margin-bottom: 0;
     width: 100%;
+    min-width: 200px;
 }
 
 .filepond--panel-root {
@@ -96,7 +98,7 @@
 .filepond--root:hover .filepond--panel-root,
 .filepond--root[data-state*="drop"] .filepond--panel-root {
     border-color: var(--color-primary) !important; 
-    background-color: rgba(59, 130, 246, 0.1) !important;
+    background-color: rgba(20, 184, 166, 0.1) !important;
 }
 
 .filepond--file {
@@ -134,5 +136,29 @@
 .filepond--root--disabled .filepond--panel-root {
     background-color: rgba(0,0,0,0.2);
     border: 1px dashed rgba(255,255,255,0.1);
+}
+
+@media (max-width: 1024px) {
+    .form-row {
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+    .form-item {
+        margin-left: 0;
+        margin-bottom: 1.5rem;
+    }
+    .form-item-no-grow {
+        align-items: center; 
+    }
+    .filepond--root {
+        width: 250px; 
+    }
+    .form-row-end {
+        justify-content: stretch;
+    }
+    .form-row-end .btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
 }
 

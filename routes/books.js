@@ -34,6 +34,11 @@ router.get('/new', async (req, res) => {
 
 // Create Book Route
 router.post('/', async (req, res) => {
+    const bookCount = await Book.countDocuments()
+    if (bookCount >= 100) {
+        return renderNewPage(res, book, true, 'Database limit reached (100 books max).')
+    }
+
     const book = new Book({
     title: req.body.title,
     author: req.body.author,
@@ -41,14 +46,19 @@ router.post('/', async (req, res) => {
     pageCount: req.body.pageCount,
     description: req.body.description
     })
-    saveCover(book, req.body.cover)
+    
+    try {
+        saveCover(book, req.body.cover)
+    } catch (e) {
+        return renderNewPage(res, book, true, e.message)
+    }
 
     try {
         const newBook = await book.save()
         res.redirect(`books/${newBook.id}`)
     } catch (err){
         console.log(err)
-        renderNewPage(res, book, true)
+        renderNewPage(res, book, true, 'Error Creating Book')
     }
     })
 
@@ -118,15 +128,15 @@ router.delete('/:id', async function (req, res) {
     }
 })
 
-async function renderNewPage(res, book, hasError = false) {
-    renderFormPage(res, book, 'new', hasError)
+async function renderNewPage(res, book, hasError = false, customMessage = null) {
+    renderFormPage(res, book, 'new', hasError, customMessage)
 }
 
 async function renderEditPage(res, book, hasError = false) {
     renderFormPage(res, book, 'edit', hasError)
 }
 
-async function renderFormPage(res, book, form, hasError = false) {
+async function renderFormPage(res, book, form, hasError = false, customMessage = null) {
     try {
         const authors = await Author.find({})
         const params = {
@@ -134,10 +144,12 @@ async function renderFormPage(res, book, form, hasError = false) {
             book: book 
         }
         if (hasError) {
-            if (form === 'edit') {
-            params.errorMessage = 'Error Updating Book'
+            if (customMessage) {
+                params.errorMessage = customMessage;
+            } else if (form === 'edit') {
+                params.errorMessage = 'Error Updating Book'
             } else {
-            params.errorMessage = 'Error Creating Book'
+                params.errorMessage = 'Error Creating Book'
             }
         }
         res.render(`books/${form}`, params)
@@ -150,6 +162,13 @@ async function renderFormPage(res, book, form, hasError = false) {
     function saveCover(book, coverEncoded) {
         if (coverEncoded == null) return
         const cover = JSON.parse(coverEncoded)
+        
+        // size limit: ~500 KB (Base64 string size approximation)
+        // 500 KB * 1024 bytes = 512,000 bytes. Base64 is ~33% larger than binary.
+        if (coverEncoded.length > 700000) { 
+            throw new Error("Image size must be less than 500KB.");
+        }
+
         if (cover != null && imageMimeTypes.includes(cover.type)) {
         book.coverImage = new Buffer.from(cover.data, 'base64')
         book.coverImageType = cover.type

@@ -19,7 +19,8 @@ FilePond.registerPlugin(
 FilePond.setOptions({
     stylePanelAspectRatio: 1 / coverAspectRatio,
     imageResizeTargetWidth: coverWidth,
-    imageResizeTargetHeight: coverHeight
+    imageResizeTargetHeight: coverHeight,
+    stylePanelLayout: 'compact',
 })
 
 FilePond.parse(document.body)
