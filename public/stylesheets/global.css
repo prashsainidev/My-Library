@@ -14,9 +14,10 @@ body {
     padding: 0;
     line-height: 1.8;
     color: var(--color-text-light);
-    background: linear-gradient(to right, 
-    var(--color-background-dark), 
-    var(--color-background-light));
+    background: var(--color-background-gradient);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 *, *::before, *::after {

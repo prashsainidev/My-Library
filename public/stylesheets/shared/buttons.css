@@ -1,64 +1,53 @@
-:root {
-    --color-btn-primary-background: hsl(var(--color-base-hue), 100%, 83%);
-    --color-btn-primary-background-dark: hsl(var(--color-base-hue), 100%, 73%);
-    --color-btn-primary-text: hsl(var(--color-base-hue), 100%, 20%);
-    --color-btn-primary-text-dark: hsl(var(--color-base-hue), 100%, 10%);
-    --color-btn-border: black;
-    --color-btn-danger-background: hsl(var(--color-danger-hue), 100%, 83%);
-    --color-btn-danger-background-dark: hsl(var(--color-danger-hue), 100%, 73%);
-    --color-btn-danger-text: black;
-    --color-btn-danger-text-dark: black;
-    
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6em 1.2em;
+    font-size: 1rem;
+    font-family: var(--font-subheading);
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-md);
 }
 
-.btn {
-    display: inline-block;
-    padding: 0.5em 1em;
-    font-size: 1rem;
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none; /* Remove underline for anchor tags */
-    cursor: pointer;
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
 }
 
 .btn-row {
     display: flex;
     align-items: flex-start;
-}
-
-.btn-row > * {
-    margin-left: 16px;
-}
-
-.btn-row > *:first-child {
-    margin-left: 0;
+    gap: 16px; /* modern way to handle spacing instead of margins */
 }
 
 a.btn {
-    display: inline-block;
-    text-align: center;
     line-height: normal; 
 }
 
 .btn-primary {
-    background-color: var(--color-btn-primary-background);
-    color: var(--color-btn-primary-text);
+    background-color: var(--color-primary);
+    color: white;
 }
 
 .btn-primary:hover {
-    background-color: var(--color-btn-primary-background-dark);
-    color: var(--color-btn-primary-text-dark);
+    background-color: var(--color-primary-hover);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
 }
 
 .btn-danger {
-    background-color: var(--color-btn-danger-background);
-    color: var(--color-btn-danger-text);
+    background-color: var(--color-danger);
+    color: white;
 }
 
 .btn-danger:hover {
-    background-color: var(--color-btn-danger-background-dark);
-    color: var(--color-btn-danger-text-dark);
+    background-color: var(--color-danger-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
 }

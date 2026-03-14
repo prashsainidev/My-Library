@@ -1,13 +1,13 @@
 :root {
-    --form-label-font-size: 20px;
-    --form-input-background-color: hsl(var(--color-base-hue), 100%, 31%);
-    --form-input-border-color: hsl(var(--color-base-hue), 100%, 50%);
-    --form-input-border-color-light: hsl(var(--color-base-hue), 100%, 80%);
+    --form-label-font-size: 1rem;
+    --form-input-background-color: var(--color-surface);
+    --form-input-border-color: var(--color-border);
+    --form-input-border-color-light: var(--color-primary);
 }
 
 .form-row {
     display: flex;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
 }
 
 .form-item {
@@ -32,61 +32,71 @@
 
 .form-item > label {
     font-size: var(--form-label-font-size);
-    margin-bottom: 5px;
-    margin-left: 5px;
+    margin-bottom: 8px;
+    margin-left: 4px;
+    font-weight: 500;
+    color: var(--color-text-light);
 }
 
 .form-item input, .form-item select, .form-item textarea {
-    height: 32px;
-    padding: 5px 8px;
-    border-radius: 5px;
+    padding: 10px 14px;
+    border-radius: var(--border-radius);
     border: 1px solid var(--form-input-border-color);
     background-color: var(--form-input-background-color);
     color: var(--color-text-light);
-    font-size: 16px;
-    font-weight: normal;
-    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    font-family: var(--font-subheading);
     outline: none;
+    transition: all var(--transition-fast);
+}
+
+.form-item input::placeholder, .form-item textarea::placeholder {
+    color: var(--color-text-muted);
 }
 
 .form-item textarea {
-    height: 100%;
-    resize: none;
+    height: 120px;
+    resize: vertical;
 }
 
 .form-item select option {
-    background-color: black;
+    background-color: var(--color-background-light);
+    color: var(--color-text-light);
 }
 
 .form-item input:focus, .form-item select:focus, .form-item textarea:focus {
     border-color: var(--form-input-border-color-light);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 
 .filepond--root {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-subheading);
     margin-bottom: 0;
     width: 100%;
 }
 
 .filepond--panel-root {
-    background-color: var(--form-input-background-color, #f4f4f4); 
-    border: 2px solid var(--form-input-border-color, #ccc); 
-    border-radius: 8px;
+    background-color: var(--color-surface) !important;
+    border: 1px dashed var(--color-text-muted) !important; 
+    border-radius: var(--border-radius);
     padding: 10px;
-    transition: all 0.3s ease; 
+    transition: all var(--transition-normal); 
 }
 
 .filepond--drop-label {
-    color: var(--color-text-light, #777); 
-    font-size: 16px;
-    font-weight: 600;
+    color: var(--color-text-light) !important; 
+    font-size: 1rem;
+    font-weight: 500;
     text-align: center;
     padding: 20px;
 }
 
-.filepond--root:hover .filepond--panel-root {
-    border-color: var(--color-hover-border, #007bff); 
+.filepond--root:hover .filepond--panel-root,
+.filepond--root[data-state*="drop"] .filepond--panel-root {
+    border-color: var(--color-primary) !important; 
+    background-color: rgba(59, 130, 246, 0.1) !important;
 }
 
 .filepond--file {
@@ -99,38 +109,30 @@
 }
 
 .cover-label {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
     margin-bottom: 8px;
-    color: var(--color-text-dark, #333); 
+    color: var(--color-text-light); 
 }
 
 .book-cover {
     display: block;
     width: 100%;
-    background: var(--form-input-background-color, #f4f4f4); 
-    border: 2px dashed var(--form-input-border-color, #ccc); 
+    background: var(--color-surface); 
+    border: 1px solid var(--color-border); 
     padding: 5px;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
 }
 
 .book-cover:hover {
-    border-color: var(--color-hover-border, #007bff); 
-    background-color: white; 
-    border-radius: 5%;
-}
-
-.filepond--drop-label {
-    font-size: 16px;
-    font-weight: bold;
-    color: #555;
-    text-align: center;
+    border-color: var(--color-primary); 
+    box-shadow: var(--shadow-glow);
 }
 
 .filepond--root--disabled .filepond--panel-root {
-    background-color: #f4f4f4;
-    border: 2px dashed #ccc;
+    background-color: rgba(0,0,0,0.2);
+    border: 1px dashed rgba(255,255,255,0.1);
 }
 
