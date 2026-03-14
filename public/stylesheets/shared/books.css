@@ -107,9 +107,13 @@
     align-content: flex-start;
     align-items: center;
     grid-gap: 1.2rem;
-    grid-template-columns: max-content auto;
+    grid-template-columns: max-content minmax(0, 1fr);
     flex: 1;
-    min-width: 300px;
+    min-width: 0; /* Crucial: allows flex child to shrink below content size */
+    width: 100%;
+    max-width: 100%; 
+    overflow-wrap: break-word; 
+    word-break: break-word;
 }
 
 .book-details-grid div:not(.book-details-label):not(.book-details-value) {
@@ -121,6 +125,10 @@
     padding: 1.5rem;
     border-radius: var(--border-radius);
     border: 1px solid var(--color-border);
+    word-wrap: break-word; /* Ensure long words break */
+    overflow-wrap: break-word; /* Better breaking mechanics */
+    word-break: break-all; /* Force break on very long continuous strings */
+    max-width: 100%; /* Prevent horizontal overflow */
 }
 
 .book-details-btn-grid {

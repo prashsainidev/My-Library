@@ -90,6 +90,9 @@ router.put('/:id', async (req, res) => {
     let book 
     try {
         book = await Book.findById(req.params.id)
+        if (book.isProtected) {
+            return res.redirect(`/books/${book.id}`) 
+        }
         book.title = req.body.title
         book.author = req.body.author
         book.publishDate = new Date(req.body.publishDate)
@@ -114,6 +117,11 @@ router.delete('/:id', async function (req, res) {
     let book
     try {
         book = await Book.findById(req.params.id)
+        
+        if (book.isProtected) {
+            return res.redirect(`/books/${book.id}`) 
+        }
+        
         await book.deleteOne()
         res.redirect('/books')
     } catch {

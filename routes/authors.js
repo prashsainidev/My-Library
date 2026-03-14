@@ -70,6 +70,9 @@ router.put('/:id', async (req,res) => {
     let author
     try {
         author =  await Author.findById(req.params.id)
+        if (author.isProtected) {
+            return res.redirect(`/authors/${author.id}`) 
+        }
         author.name = req.body.name
         await author.save()
         res.redirect(`/authors/${author.id}`)
@@ -92,6 +95,10 @@ router.delete('/:id', async (req, res) => {
 
         if (!author) {
             return res.status(404).send('Author not found');
+        }
+
+        if (author.isProtected) {
+            return res.redirect(`/authors/${author.id}`) 
         }
 
         // Check for associated books
