@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('layout',  'layouts/layout')
 app.use(expressLayouts)
 app.use(methodOverride('_method'))
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
 
 const mongoose = require('mongoose');
@@ -42,7 +42,11 @@ app.use('/authors', authorRouter)
 app.use('/books', bookRouter)
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
-})
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Server is running at http://localhost:${PORT}`);
+    })
+}
+
+module.exports = app;
