@@ -1,128 +1,91 @@
-# MyLibrary
+# 📚 MyLibrary (Premium Edition)
 
-MyLibrary is a simple library management web application built with Node.js, Express, and MongoDB (using Mongoose). This project demonstrates CRUD operations for managing authors and books, including uploading a cover image for each book.
-
----
-
-## Demo Video
-
-<details>
-  <summary><strong>Click to watch the demo video</strong></summary>
-  <p>
-    <a href="https://drive.google.com/drive/folders/1vchIKN0NuujQC6HbHTOMXx2jyICYIZYZ?usp=sharing" target="_blank">
-      <img src="./public/assets/Landing Page.png" alt="Demo Video" width="600" style="max-width:100%;">
-    </a>
-  </p>
-</details>
+MyLibrary is a sleek, modern, and fully responsive library management web application built with Node.js, Express, and MongoDB. It demonstrates full CRUD operations for managing books and authors, featuring advanced UI aesthetics, image uploading, and database protection mechanisms designed for safe public deployment.
 
 ---
 
-## Screenshots
+## ✨ Key Features
 
-Below is a grid of screenshots demonstrating various pages of the application:
+- **Premium UI/UX:** 
+  - Complete dark theme (Obsidian, Teal, and Warm Gold gradient accents).
+  - Glassmorphism effects with modern, floating card designs.
+  - Fully responsive layout featuring a fixed left sidebar on desktop and a smooth hamburger menu on mobile devices.
+  - Custom SVG branding and typography.
 
-<table>
-  <tr>
-    <td align="center"><img src="./public/assets/Landing Page.png" alt="Screenshot 1" width="300" style="max-width:100%;"></td>
-    <td align="center"><img src="./public/assets/Search Books Page.png" alt="Screenshot 2" width="300" style="max-width:100%;"></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="./public/assets/Add New Book Page.png" alt="Screenshot 3" width="300" style="max-width:100%;"></td>
-    <td align="center"><img src="./public/assets/Search Authors.png" alt="Screenshot 4" width="300" style="max-width:100%;"></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><img src="./public/assets/Add New Author.png" alt="Screenshot 5" width="300" style="max-width:100%;"></td>
-  </tr>
-</table>
+- **Author & Book Management (CRUD):**
+  - Add, update, and delete authors and books dynamically.
+  - View individual author profiles and all books published by them.
 
-## Features
+- **Advanced Image Handling:**
+  - Integrated with **FilePond** for seamless Drag & Drop image uploads.
+  - Images are base64-encoded, resized, and saved directly into the MongoDB document block.
 
-- **Author Management:**
+- **🛡️ Database Protection & Demo Mode:**
+  - **Size Limits:** Hard-capped image file size limits (~500KB) to protect database storage.
+  - **Count Limits:** Prevents users from adding more than 100 books to protect the free MongoDB tier.
+  - **Protected Data:** Includes an `isProtected` boolean flag on specific books/authors. Protected entries hide the "Edit" and "Delete" buttons from the public UI and block modification requests at the route level.
 
-  - Add, update, and delete authors
-  - View a list of authors
+- **Automated Seeding:**
+  - A robust `seedData.js` script that uses public APIs to automatically download and seed 10 classic/technical books (with their covers) into your database as unmodifiable protected instances.
 
-- **Book Management:**
+---
 
-  - Add, update, and delete books
-  - Upload a cover image for each book
-  - View a list of books
+## 🚀 Tech Stack
 
-- **CRUD Demonstration:**
-  - A simple example to illustrate managing related data using Node.js, Express, and MongoDB
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB Atlas, Mongoose ODM
+- **Frontend Template:** EJS (Embedded JavaScript templates)
+- **Styling:** Vanilla CSS (Variables, Grid, Flexbox, Media Queries)
+- **File Upload:** FilePond, Base64 Encoding
+- **Deployment:** Vercel Serverless Ready (`vercel.json`)
 
-## Project Motivation
+---
 
-The primary goal of MyLibrary is to serve as a learning tool for basic CRUD operations. It demonstrates how authors and books (with cover images) can be managed using a modern web stack. This project does not include full book file uploads (such as PDFs), keeping the focus on core functionality.
-
-## Installation
+## 🛠️ Installation & Setup
 
 1. **Clone the repository:**
-
    ```bash
    git clone https://github.com/prashantsaini1525/MyLibrary.git
    cd MyLibrary
    ```
 
 2. **Install dependencies:**
-
    ```bash
    npm install
    ```
 
 3. **Set Up Environment Variables:**
+   Create a `.env` file in the root directory and add your MongoDB connection string:
+   ```env
+   DATABASE_URL=your_mongodb_connection_string
+   PORT=3000
+   ```
 
-- Create a .env file in the root directory with your configuration:
+4. **Seed the Database (Optional but Recommended):**
+   Run the seeding script to populate your database with 10 high-quality, protected demo books:
+   ```bash
+   node seedData.js
+   ```
 
-  ```bash
-  MONGO_URI=your_mongodb_connection_string
-  PORT=3000
-  ```
+5. **Run the Application locally:**
+   ```bash
+   npm run devStart
+   ```
+   Open your browser and navigate to `http://localhost:3000`.
 
-4. **Run the Application:**
+---
 
-- Start the server:
+## 🌐 Deploying to Vercel
 
-  ```bash
-  npm start
-  ```
+This repository is pre-configured to be deployed natively on Vercel as Serverless Functions. 
+1. Import the repository into your Vercel Dashboard.
+2. Under "Environment Variables", add the `DATABASE_URL` key and provide your MongoDB connection string.
+3. Deploy! Vercel handles the Express routing using the `server.js` export mapping and `vercel.json`.
 
-- Or use development mode:
+---
 
-  ```bash
-  npm run devStart
-  ```
-
-5. **Access the Application:**
-
-- Open your browser and navigate to http://localhost:3000.
-
-## Project Structure
-
-- **server.js:** Main file setting up Express and connecting to MongoDB.
-
-- **models/:** Contains Mongoose models for Authors and Books.
-
-- **views/:** Contains EJS templates for rendering the UI.
-
-- **public/:** Contains static assets (including cover images).
-
---- 
-
-## Future Enhancements
-
-- **Book File Uploads:**
-Add functionality to allow uploading complete book files (e.g., PDFs) using middleware like Multer.
-
-- **User Authentication:**
-Implement authentication for managing access to book and author data.
-
-- **Enhanced UI/UX:**
-Improve the frontend with modern frameworks or design enhancements.
-
-## Contributing
-
-Contributions are welcome! Feel free to fork the repository, open pull requests, or submit issues with suggestions and bug reports.
+## 🤝 Contributing
+Contributions are welcome! Feel free to fork the repository, open pull requests, or submit issues with suggestions.
 
 ## 📄 License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
