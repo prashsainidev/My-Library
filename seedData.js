@@ -18,7 +18,7 @@ const seedBooksData = [
         publishDate: "2008-08-01",
         pageCount: 464,
         description: "A Handbook of Agile Software Craftsmanship.",
-        coverUrl: "https://books.google.com/books/content?id=_i6bDeoCQzsC&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/Clean%20Code-L.jpg"
     },
     {
         title: "The Pragmatic Programmer",
@@ -26,7 +26,7 @@ const seedBooksData = [
         publishDate: "1999-10-20",
         pageCount: 352,
         description: "From Journeyman to Master.",
-        coverUrl: "https://books.google.com/books/content?id=5wBQEp6ruIAC&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/The%20Pragmatic%20Programmer-L.jpg"
     },
     {
         title: "1984",
@@ -34,7 +34,7 @@ const seedBooksData = [
         publishDate: "1949-06-08",
         pageCount: 328,
         description: "A dystopian social science fiction novel and cautionary tale.",
-        coverUrl: "https://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/1984-L.jpg"
     },
     {
         title: "To Kill a Mockingbird",
@@ -42,7 +42,7 @@ const seedBooksData = [
         publishDate: "1960-07-11",
         pageCount: 281,
         description: "The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it.",
-        coverUrl: "https://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/To%20Kill%20a%20Mockingbird-L.jpg"
     },
     {
         title: "Harry Potter and the Sorcerer's Stone",
@@ -50,7 +50,7 @@ const seedBooksData = [
         publishDate: "1997-06-26",
         pageCount: 309,
         description: "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
-        coverUrl: "https://books.google.com/books/content?id=wrOQLV6xB-wC&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/Harry%20Potter%20and%20the%20Sorcerer's%20Stone-L.jpg"
     },
     {
         title: "The Great Gatsby",
@@ -58,7 +58,7 @@ const seedBooksData = [
         publishDate: "1925-04-10",
         pageCount: 180,
         description: "A 1925 novel written by American author F. Scott Fitzgerald that follows a cast of characters living in the fictional towns of West Egg and East Egg on prosperous Long Island in the summer of 1922.",
-        coverUrl: "https://books.google.com/books/content?id=iXn5U2IzTKsC&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/The%20Great%20Gatsby-L.jpg"
     },
     {
         title: "Pride and Prejudice",
@@ -66,7 +66,7 @@ const seedBooksData = [
         publishDate: "1813-01-28",
         pageCount: 432,
         description: "Pride and Prejudice is an 1813 romantic novel of manners written by Jane Austen.",
-        coverUrl: "https://books.google.com/books/content?id=s1gVAAAAYAAJ&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/Pride%20and%20Prejudice-L.jpg"
     },
     {
         title: "The Hobbit",
@@ -74,7 +74,7 @@ const seedBooksData = [
         publishDate: "1937-09-21",
         pageCount: 310,
         description: "Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling any farther than his pantry or cellar. But his contentment is disturbed when the wizard Gandalf and a company of dwarves arrive on his doorstep one day to whisk him away on an adventure.",
-        coverUrl: "https://books.google.com/books/content?id=pD6arNyKyi8C&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/The%20Hobbit-L.jpg"
     },
     {
         title: "Design Patterns",
@@ -82,7 +82,7 @@ const seedBooksData = [
         publishDate: "1994-10-21",
         pageCount: 395,
         description: "Elements of Reusable Object-Oriented Software.",
-        coverUrl: "https://books.google.com/books/content?id=6oHuKQe3TjQC&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/Design%20Patterns-L.jpg"
     },
     {
         title: "Refactoring",
@@ -90,7 +90,7 @@ const seedBooksData = [
         publishDate: "1999-07-08",
         pageCount: 431,
         description: "Improving the Design of Existing Code.",
-        coverUrl: "https://books.google.com/books/content?id=1MsETFkV3h8C&printsec=frontcover&img=1&zoom=1"
+        coverUrl: "https://covers.openlibrary.org/b/title/Refactoring-L.jpg"
     }
 ];
 
@@ -127,13 +127,13 @@ async function seedDatabase() {
         // 2. Process Books
         for (const bookInfo of seedBooksData) {
             const authorId = authorMap.get(bookInfo.authorName);
-            
+
             // Check if book already exists
             const existingBook = await Book.findOne({ title: bookInfo.title });
-            
+
             if (!existingBook) {
                 console.log(`Downloading cover image for: ${bookInfo.title}...`);
-                
+
                 let base64Cover = "";
                 let mimeType = 'image/jpeg';
                 try {
@@ -141,7 +141,7 @@ async function seedDatabase() {
                 } catch(coverFetchErr) {
                     // Fallback to a solid dark teal 1x1 pixel if download fails
                     console.log(`Failed to download cover for ${bookInfo.title}, using fallback placeholder.`);
-                    base64Cover = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="; 
+                    base64Cover = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
                     mimeType = 'image/png';
                 }
 
